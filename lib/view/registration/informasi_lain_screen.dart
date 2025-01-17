@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:umkm/component/button_disabled.dart';
+import 'package:umkm/component/custom_dialog.dart';
 import 'package:umkm/component/custom_textfield.dart';
 import 'package:umkm/model/dummy_models.dart';
 import 'package:umkm/utils/constant.dart';
@@ -47,7 +48,7 @@ class _InformasiLainScreenState extends State<InformasiLainScreen> {
                 ),
                 leading: IconButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      showDialogPrevious(context);
                     },
                     icon: const Icon(Icons.arrow_back_ios_new_outlined),
                     color: ColorUI.BLACK),
