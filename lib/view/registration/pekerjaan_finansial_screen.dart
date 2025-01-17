@@ -1,6 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_offline/flutter_offline.dart';
+import 'package:umkm/component/button_disabled.dart';
+import 'package:umkm/component/custom_dialog.dart';
 import 'package:umkm/model/dummy_models.dart';
 import 'package:umkm/utils/constant.dart';
 
@@ -46,7 +49,7 @@ class _PekerjaanFinansialScreenState extends State<PekerjaanFinansialScreen> {
                 ),
                 leading: IconButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      showDialogPrevious(context);
                     },
                     icon: const Icon(Icons.arrow_back_ios_new_outlined),
                     color: ColorUI.BLACK),
@@ -218,13 +221,58 @@ class _PekerjaanFinansialScreenState extends State<PekerjaanFinansialScreen> {
               validator: (value) {
                 return null;
               }),
-          //     const SizedBox(height: 20),
-          // Text(
-          //   'Nomor Handphone Kerja',
-          //   style: CAPTION_TEXT_STYLE.copyWith(
-          //       fontSize: 14, fontWeight: FontUI.WEIGHT_SEMI_BOLD),
-          // ),
-          // const SizedBox(height: 5),
+          const SizedBox(height: 20),
+          Text(
+            'Nomor Handphone Kerja',
+            style: CAPTION_TEXT_STYLE.copyWith(
+                fontSize: 14, fontWeight: FontUI.WEIGHT_SEMI_BOLD),
+          ),
+          const SizedBox(height: 5),
+          TextFormField(
+              keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.next,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly
+              ],
+              decoration: InputDecoration(
+                  hintText: '8123456789',
+                  contentPadding: const EdgeInsets.only(left: 0, top: 12),
+                  prefixIcon: Container(
+                    margin: const EdgeInsets.only(left: 12.0, right: 8.0),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: ColorUI.LIGHT_GREY,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      "+62",
+                      style: GREY_TEXT_STYLE.copyWith(
+                        fontWeight: FontUI.WEIGHT_NORMAL,
+                      ),
+                    ),
+                  ),
+                  prefixIconConstraints: const BoxConstraints(
+                    minWidth: 0,
+                    minHeight: 0,
+                  ),
+                  hintStyle:
+                      GREY_TEXT_STYLE.copyWith(fontWeight: FontUI.WEIGHT_LIGHT),
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(width: 1, color: ColorUI.PRIMARY)),
+                  enabledBorder: const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1, color: ColorUI.GREY_BORDER)),
+                  errorBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: ColorUI.PRIMARY),
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                  border: const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1, color: ColorUI.GREY_BORDER))),
+              validator: (value) {
+                return null;
+              }),
           const SizedBox(height: 20),
           Text(
             "Finansial (Opsional)",
@@ -408,6 +456,7 @@ class _PekerjaanFinansialScreenState extends State<PekerjaanFinansialScreen> {
                         child: Text(e, style: const TextStyle(fontSize: 14)));
                   }).toList())
               : const SizedBox(),
+          const SizedBox(height: 20),
           Text(
             'Sumber Dana',
             style: CAPTION_TEXT_STYLE.copyWith(
@@ -465,7 +514,9 @@ class _PekerjaanFinansialScreenState extends State<PekerjaanFinansialScreen> {
                         value: e,
                         child: Text(e, style: const TextStyle(fontSize: 14)));
                   }).toList())
-              : const SizedBox()
+              : const SizedBox(),
+          const SizedBox(height: 20),
+          DisabledButton(text: "Lanjut ke Jenis Usaha", onPressed: () {})
         ],
       ),
     );
