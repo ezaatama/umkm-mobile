@@ -124,7 +124,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   Flexible(
                       child: CardRegist(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(context, '/identitas-diri');
+                          },
                           tahap: "Tahap 1",
                           title: "Identitas Diri"))
                 ],
@@ -195,7 +197,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   Flexible(
                       child: CardRegist(
-                          onTap: () {}, tahap: "Tahap 4", title: "Jenis Usaha"))
+                          onTap: () {
+                            Navigator.pushNamed(context, '/jenis-usaha');
+                          },
+                          tahap: "Tahap 4",
+                          title: "Jenis Usaha"))
                 ],
               )
             ],
