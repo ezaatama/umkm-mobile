@@ -1,3 +1,25 @@
+class DummyAgama {
+  static String selectedValue = '';
+
+  static List<String> agama = [
+    "Islam",
+    "Kristen",
+    "Katolik",
+    "Konghucu",
+  ];
+}
+
+class DummyPerkawinan {
+  static String selectedValue = '';
+
+  static List<String> statusKawin = [
+    "Lajang",
+    "Menikah",
+    "Duda",
+    "Janda",
+  ];
+}
+
 class DummyPendidikan {
   static String selectedValue = '';
 
@@ -62,3 +84,89 @@ class DummySumberDana {
     "Investasi",
   ];
 }
+
+class DummyJenisKelamin {
+  bool isSelected;
+  String text;
+
+  DummyJenisKelamin({this.isSelected = false, required this.text});
+}
+
+int jkValue = 1;
+
+final List<DummyJenisKelamin> jkStatus = [
+  DummyJenisKelamin(text: "Laki-Laki"),
+  DummyJenisKelamin(text: "Perempuan"),
+];
+
+class DummyKriteria {
+  static String selectedValue = '';
+
+  static List<String> kriteria = [
+    "Kriteria 1",
+    "Kriteria 2",
+    "Kriteria 3",
+  ];
+}
+
+class DummyQR {
+  static String selectedValue = '';
+
+  static List<String> qr = [
+    "QR Sticker",
+    "QR Manual",
+  ];
+}
+
+class DummyProduk {
+  static String selectedValue = '';
+
+  static List<String> produk = [
+    "Mikro",
+    "Makro",
+  ];
+}
+
+class DummySubProduk {
+  static String selectedValue = '';
+
+  static List<String> subProduk = [
+    "KUR",
+    "KIR",
+  ];
+}
+
+class DummyCabang {
+  static String selectedValue = '';
+
+  static List<String> cabang = [
+    "KCP WALIKOTA JAKARTA PUSAT",
+    "KCP WALIKOTA JAKARTA TIMUR",
+    "KCP WALIKOTA JAKARTA SELATAN",
+  ];
+}
+
+class DummyPlafon {
+  static String selectedValue = '';
+
+  static List<String> plafon = [
+    "Plafon A",
+    "Plafon B",
+    "Plafon C",
+  ];
+}
+
+class DummyJangkaWaktu {
+  bool isSelected;
+  String text;
+
+  DummyJangkaWaktu({this.isSelected = false, required this.text});
+}
+
+int jwValue = 1;
+
+final List<DummyJangkaWaktu> jwStatus = [
+  DummyJangkaWaktu(text: "12 Bulan"),
+  DummyJangkaWaktu(text: "24 Bulan"),
+  DummyJangkaWaktu(text: "36 Bulan"),
+];
