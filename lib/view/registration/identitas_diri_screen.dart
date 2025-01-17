@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +6,8 @@ import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:umkm/component/button_disabled.dart';
+import 'package:umkm/component/camera_ktp.dart';
+import 'package:umkm/component/camera_selfie.dart';
 import 'package:umkm/component/custom_calendar.dart';
 import 'package:umkm/component/custom_dialog.dart';
 import 'package:umkm/component/custom_textfield.dart';
@@ -134,7 +137,24 @@ class _IdentitasDiriScreenState extends State<IdentitasDiriScreen> {
         children: [
           //KTP
           GestureDetector(
-            onTap: () {},
+            onTap: () async {
+              await availableCameras().then(
+                (value) {
+                  if (value.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Tidak terdeteksi Kamera")));
+                    return;
+                  }
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => CameraKTP(camera: value[0])));
+                },
+              ).catchError((e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Terdapat kesalahan: $e")));
+              });
+            },
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * .25,
@@ -487,10 +507,46 @@ class _IdentitasDiriScreenState extends State<IdentitasDiriScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 20),
-                _dataFotoPasangan(() {}, "Ambil Foto E-KTP Pasangan",
+                _dataFotoPasangan(() async {
+                  await availableCameras().then(
+                    (value) {
+                      if (value.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Tidak terdeteksi Kamera")));
+                        return;
+                      }
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => CameraKTP(camera: value[0])));
+                    },
+                  ).catchError((e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Terdapat kesalahan: $e")));
+                  });
+                }, "Ambil Foto E-KTP Pasangan",
                     "Mohon Ambil Foto E-KTP Pasangan Anda"),
                 const SizedBox(height: 5),
-                _dataFotoPasangan(() {}, "Ambil Foto Selfie Pasangan",
+                _dataFotoPasangan(() async {
+                  await availableCameras().then(
+                    (value) {
+                      if (value.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Tidak terdeteksi Kamera")));
+                        return;
+                      }
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => CameraSelfie(camera: value[1])));
+                    },
+                  ).catchError((e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Terdapat kesalahan: $e")));
+                  });
+                }, "Ambil Foto Selfie Pasangan",
                     "Mohon Ambil Selfie Pasangan Anda"),
                 const SizedBox(height: 20),
                 Text(

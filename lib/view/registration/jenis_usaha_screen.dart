@@ -1,9 +1,11 @@
+import 'package:camera/camera.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:umkm/component/button_disabled.dart';
+import 'package:umkm/component/camera_lokasi_usaha.dart';
 import 'package:umkm/component/custom_dialog.dart';
 import 'package:umkm/component/custom_textfield.dart';
 import 'package:umkm/component/jangka_waktu.dart';
@@ -380,7 +382,24 @@ class _JenisUsahaScreenState extends State<JenisUsahaScreen> {
           const SizedBox(height: 5),
           _lokasiTempat(() {}, "Tentukan Titik di Peta"),
           const SizedBox(height: 20),
-          _fotoLokasi(() {}, "Ambil Foto Lokasi Usaha (Opsional)",
+          _fotoLokasi(() async {
+            await availableCameras().then(
+              (value) {
+                if (value.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Tidak terdeteksi Kamera")));
+                  return;
+                }
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => CameraLokasiUsaha(camera: value[0])));
+              },
+            ).catchError((e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Terdapat kesalahan: $e")));
+            });
+          }, "Ambil Foto Lokasi Usaha (Opsional)",
               "Mohon Ambil Foto Lokasi Usaha"),
 
           //PERBANKAN
